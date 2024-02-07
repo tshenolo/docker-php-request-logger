@@ -9,13 +9,13 @@ To use this request logger, follow these steps:
 1. Clone this repository to your local machine:
 
     ```bash
-    git clone https://github.com/tshenolo/request-logger.git
+    git clone https://github.com/tshenolo/docker-php-request-logger.git
     ```
 
 2. Navigate into the cloned directory:
 
     ```bash
-    cd request-logger
+    cd docker-php-request-logger
     ```
 
 3. Build the Docker image using the provided Dockerfile:
