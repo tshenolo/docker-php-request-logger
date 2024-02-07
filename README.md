@@ -38,7 +38,8 @@ Once the Docker container is running, you can send HTTP requests to the server, 
 
 
 ### Example:
-    ```
+
+    ```bash
     curl -X GET \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer my_token" \
