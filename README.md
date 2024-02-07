@@ -39,12 +39,12 @@ Once the Docker container is running, you can send HTTP requests to the server, 
 
 ### Example:
 
-    ```bash
-    curl -X GET \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer my_token" \
-    http://localhost:8080/your_script.php?key1=value1&key2=value2
-    ```
+```bash
+curl -X GET \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer my_token" \
+http://localhost:8080/your_script.php?key1=value1&key2=value2
+```
 
 ## Contributing
 
