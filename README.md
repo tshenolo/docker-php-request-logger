@@ -27,23 +27,46 @@ To use this request logger, follow these steps:
 4. Run the Docker container:
 
     ```bash
-    docker run -p 8080:80 request-logger
+    docker run -d -p 8080:80 request-logger
     ```
 
     This will start the PHP script inside a Docker container accessible at http://localhost:8080/.
+
+Optional:
+5. Interact with the container's shell:
+    ```bash
+    docker exec -it <container_id_or_name> /bin/bash
+    ```
+
+6. Stop container:
+    ```bash
+    docker stop <container_id_or_name> 
+    ```
+
+7. Remove image
+    ```bash
+    docker rmi -f <image_id_or_name> 
+    ```
 
 ## Usage
 
 Once the Docker container is running, you can send HTTP requests to the server, and the script will log them along with the headers and request data to a file named `request_log.txt` inside the container.
 
 
-### Example:
+### Examples:
 
 ```bash
 curl -X GET \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer my_token" \
 http://localhost:8080/index.php?key1=value1&key2=value2
+```
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"key1": "value1", "key2": "value2"}' \
+  http://localhost:8080/index.php
 ```
 
 ## Contributing
@@ -66,3 +89,8 @@ Project Link: [https://github.com/tshenolo/docker-php-request-logger](https://gi
 - [PHP](https://www.php.net/)
 - [Ubuntu](https://ubuntu.com/)
 - [Docker](https://www.docker.com/)
+
+
+## TODO:
+- Log to stdout: file_put_contents('php://stdout', $logMessage . "\n");
+- route all request to index.php using .htaccess
