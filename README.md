@@ -36,6 +36,15 @@ To use this request logger, follow these steps:
 
 Once the Docker container is running, you can send HTTP requests to the server, and the script will log them along with the headers and request data to a file named `request_log.txt` inside the container.
 
+
+### Example:
+    ```
+    curl -X GET \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer my_token" \
+    http://localhost:8080/your_script.php?key1=value1&key2=value2
+    ```
+
 ## Contributing
 
 If you have suggestions or improvements, feel free to open an issue or create a pull request. Contributions are welcome!
