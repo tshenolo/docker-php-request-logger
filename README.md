@@ -1,0 +1,1 @@
+# docker-php-request-logger
