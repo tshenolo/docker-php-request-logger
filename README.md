@@ -89,8 +89,3 @@ Project Link: [https://github.com/tshenolo/docker-php-request-logger](https://gi
 - [PHP](https://www.php.net/)
 - [Ubuntu](https://ubuntu.com/)
 - [Docker](https://www.docker.com/)
-
-
-## TODO:
-- Log to stdout: file_put_contents('php://stdout', $logMessage . "\n");
-- route all request to index.php using .htaccess
