@@ -36,25 +36,29 @@ To use this request logger, follow these steps:
 
     This will start the PHP script inside a Docker container accessible at http://localhost:8080/.
 
-Optional:
-5. Interact with the container's shell:
+5. View logs:
+    ```bash
+    docker logs <container_id_or_name>
+    ```
+
+6. Interact with the container's shell:
     ```bash
     docker exec -it <container_id_or_name> /bin/bash
     ```
 
-6. Stop container:
+7. Stop container:
     ```bash
     docker stop <container_id_or_name> 
     ```
 
-7. Remove image
+8. Remove image
     ```bash
     docker rmi -f <image_id_or_name> 
     ```
-
+    
 ## Usage
 
-Once the Docker container is running, you can send HTTP requests to the server, and the script will log them along with the headers and request data to a file named `request_log.txt` inside the container.
+Once the Docker container is running, you can send HTTP requests to the server, and the script will log them along with the headers and request data. The logs can be viewed using the command: docker logs <container_id_or_name>.
 
 
 ### Examples:
