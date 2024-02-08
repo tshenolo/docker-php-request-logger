@@ -1,5 +1,9 @@
 # Docker PHP Request Logger
 
+![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+
 This repository contains a PHP script that logs all incoming HTTP requests along with their headers and request data ($_REQUEST). This can be useful for debugging or monitoring purposes in web applications.
 
 ## Getting Started
@@ -77,15 +81,7 @@ If you have suggestions or improvements, feel free to open an issue or create a 
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contact
-
-[@tshenolo](https://twitter.com/tshenolo)
-
-
-Project Link: [https://github.com/tshenolo/docker-php-request-logger](https://github.com/tshenolo/docker-php-request-logger)
-
-## Acknowledgments
-
-- [PHP](https://www.php.net/)
-- [Ubuntu](https://ubuntu.com/)
-- [Docker](https://www.docker.com/)
+## Thank you for the Support
+- ⭐ Give this repo a ⭐ star ⭐ at the top of the page
+- 🐦 Follow me on twitter [twitter](https://twitter.com/tshenolo)
+- 📺 Subscribe to my [Youtube channel](https://www.youtube.com/@tshenolo?sub_confirmation=1)
