@@ -41,7 +41,7 @@ To use this request logger, follow these steps:
     docker logs <container_id_or_name>
     ```
 
-6. Interact with the container's shell:
+6. Access the container:
     ```bash
     docker exec -it <container_id_or_name> /bin/bash
     ```
