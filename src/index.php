@@ -65,8 +65,6 @@ $logMessage .= colorize("Request Data:\n", "NOTE") . print_r($requestDataArray, 
 $logMessage .= colorize("\$_SERVER Data:\n", "NOTE") . print_r($serverData, true) . "\n\n";
 $logMessage .= colorize("Full Request Data:\n", "NOTE") . print_r($requestFullData, true) . "\n\n";
 
-// Determine the log file based on the current date
-$logFilename = 'logs/log_' . date('Y-m-d') . '.log';
-file_put_contents($logFilename, $logMessage . "\n", FILE_APPEND);
+file_put_contents('php://stdout', $logMessage . "\n");
 
 ?>
