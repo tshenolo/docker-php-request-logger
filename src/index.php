@@ -27,22 +27,46 @@ if ($requestMethod === 'POST' && isset($_SERVER['CONTENT_TYPE']) && strpos($_SER
 // Merge POST and GET data with precedence given to GET data
 $requestDataArray = array_merge($_GET, $requestDataArray);
 
-// Convert the request data array to a string for logging
-$requestDataString = print_r($requestDataArray, true);
-
 // Get $_SERVER data
-$serverData = print_r($_SERVER, true);
+$serverData = $_SERVER;
 
-// GET Full Request
-$requestFullData = file_get_contents('php://input');
-$requestFullDataString = print_r($requestFullData, true);
+// Create a structured array for logging
+$logData = [
+    'timestamp' => date('Y-m-d H:i:s'),
+    'requestMethod' => $requestMethod,
+    'url' => $requestUri,
+    'headers' => $headers,
+    'requestData' => $requestDataArray,
+    'serverData' => $serverData
+];
 
-// Create a log message with date/time, request method, URL, headers, request data, and $_SERVER data
-$logMessage = "[" . date('Y-m-d H:i:s') . "] Request Method: $requestMethod, URL: $requestUri\n";
-$logMessage .= "Headers:\n" . print_r($headers, true) . "\n";
-$logMessage .= "Request Data:\n$requestDataString\n\n";
-$logMessage .= "\$_SERVER Data:\n$serverData\n\n";
-$logMessage .= "Full Request Data:\n$requestFullDataString\n\n";
+// Encode log data to JSON with pretty print
+$logMessage = json_encode($logData, JSON_PRETTY_PRINT);
+
+// Function to apply ANSI color coding for console output
+function colorize($text, $status = 'INFO') {
+    $out = "";
+    switch($status) {
+        case "INFO":
+            $out = "[42m"; // Green background
+            break;
+        case "ERROR":
+            $out = "[41m"; // Red background
+            break;
+        case "WARNING":
+            $out = "[43m"; // Yellow background
+            break;
+        default:
+            $out = "[0m"; // No color
+            break;
+    }
+    return "\033" . $out . "$text \033[0m";
+}
+
+// Apply color coding if running in a console that supports ANSI colors
+if (php_sapi_name() == 'cli') {
+    $logMessage = colorize($logMessage);
+}
 
 file_put_contents('php://stdout', $logMessage . "\n");
 
