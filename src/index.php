@@ -33,11 +33,16 @@ $requestDataString = print_r($requestDataArray, true);
 // Get $_SERVER data
 $serverData = print_r($_SERVER, true);
 
+// GET Full Request
+$requestFullData = file_get_contents('php://input');
+$requestFullDataString = print_r($requestFullData, true);
+
 // Create a log message with date/time, request method, URL, headers, request data, and $_SERVER data
 $logMessage = "[" . date('Y-m-d H:i:s') . "] Request Method: $requestMethod, URL: $requestUri\n";
 $logMessage .= "Headers:\n" . print_r($headers, true) . "\n";
 $logMessage .= "Request Data:\n$requestDataString\n\n";
 $logMessage .= "\$_SERVER Data:\n$serverData\n\n";
+$logMessage .= "Full Request Data:\$requestFullDataString\n\n";
 
 file_put_contents('php://stdout', $logMessage . "\n");
 
