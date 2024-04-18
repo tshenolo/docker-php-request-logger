@@ -1,5 +1,27 @@
 <?php
 
+function colorize($text, $status) {
+    $out = "";
+    switch($status) {
+        case "SUCCESS":
+            $out = "\033[32m"; // Green
+            break;
+        case "ERROR":
+            $out = "\033[31m"; // Red
+            break;
+        case "WARNING":
+            $out = "\033[33m"; // Yellow
+            break;
+        case "NOTE":
+            $out = "\033[34m"; // Blue
+            break;
+        default:
+            $out = "\033[0m"; // No Color
+            break;
+    }
+    return $out . $text . "\033[0m";
+}
+
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestUri = $_SERVER['REQUEST_URI'];
 
@@ -27,47 +49,24 @@ if ($requestMethod === 'POST' && isset($_SERVER['CONTENT_TYPE']) && strpos($_SER
 // Merge POST and GET data with precedence given to GET data
 $requestDataArray = array_merge($_GET, $requestDataArray);
 
+// Convert the request data array to a string for logging
+$requestDataString = print_r($requestDataArray, true);
+
 // Get $_SERVER data
-$serverData = $_SERVER;
+$serverData = print_r($_SERVER, true);
 
-// Create a structured array for logging
-$logData = [
-    'timestamp' => date('Y-m-d H:i:s'),
-    'requestMethod' => $requestMethod,
-    'url' => $requestUri,
-    'headers' => $headers,
-    'requestData' => $requestDataArray,
-    'serverData' => $serverData
-];
+// GET Full Request
+$requestFullData = file_get_contents('php://input');
 
-// Encode log data to JSON with pretty print
-$logMessage = json_encode($logData, JSON_PRETTY_PRINT);
+// Create a log message with date/time, request method, URL, headers, request data, and $_SERVER data
+$logMessage = colorize("[" . date('Y-m-d H:i:s') . "] Request Method: $requestMethod, URL: $requestUri\n", "NOTE");
+$logMessage .= colorize("Headers:\n", "NOTE") . print_r($headers, true) . "\n";
+$logMessage .= colorize("Request Data:\n", "NOTE") . print_r($requestDataArray, true) . "\n\n";
+$logMessage .= colorize("\$_SERVER Data:\n", "NOTE") . print_r($serverData, true) . "\n\n";
+$logMessage .= colorize("Full Request Data:\n", "NOTE") . print_r($requestFullData, true) . "\n\n";
 
-// Function to apply ANSI color coding for console output
-function colorize($text, $status = 'INFO') {
-    $out = "";
-    switch($status) {
-        case "INFO":
-            $out = "[42m"; // Green background
-            break;
-        case "ERROR":
-            $out = "[41m"; // Red background
-            break;
-        case "WARNING":
-            $out = "[43m"; // Yellow background
-            break;
-        default:
-            $out = "[0m"; // No color
-            break;
-    }
-    return "\033" . $out . "$text \033[0m";
-}
-
-// Apply color coding if running in a console that supports ANSI colors
-if (php_sapi_name() == 'cli') {
-    $logMessage = colorize($logMessage);
-}
-
-file_put_contents('php://stdout', $logMessage . "\n");
+// Determine the log file based on the current date
+$logFilename = 'logs/log_' . date('Y-m-d') . '.log';
+file_put_contents($logFilename, $logMessage . "\n", FILE_APPEND);
 
 ?>
