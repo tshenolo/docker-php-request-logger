@@ -42,7 +42,7 @@ $logMessage = "[" . date('Y-m-d H:i:s') . "] Request Method: $requestMethod, URL
 $logMessage .= "Headers:\n" . print_r($headers, true) . "\n";
 $logMessage .= "Request Data:\n$requestDataString\n\n";
 $logMessage .= "\$_SERVER Data:\n$serverData\n\n";
-$logMessage .= "Full Request Data:\$requestFullDataString\n\n";
+$logMessage .= "Full Request Data:\n$requestFullDataString\n\n";
 
 file_put_contents('php://stdout', $logMessage . "\n");
 
